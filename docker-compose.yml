@@ -1,23 +1,19 @@
-version: "3.9"
-
 services:
   web:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: php-native
-    volumes:
-      - ./src:/var/www/html
-    user: "33:33"
+    ports:
+      - '3000:80'
+    container_name: php-xprohotel
     restart: unless-stopped
     labels:
       - coolify.managed=true
-      - coolify.type=application
       - traefik.enable=true
-      - traefik.http.routers.native.rule=Host(`xprohotel.hostspot.online`)
-      - traefik.http.routers.native.entryPoints=http
-      - traefik.http.middlewares.gzip.compress=true
-      - traefik.http.routers.native.middlewares=gzip
+      - "traefik.http.routers.xpro.rule=Host(`xprohotel.hostspot.online`)"
+      - traefik.http.routers.xpro.entryPoints=http
+      - traefik.http.middlewares.xpro-gzip.compress=true
+      - traefik.http.routers.xpro.middlewares=xpro-gzip
     networks:
       - coolify
 

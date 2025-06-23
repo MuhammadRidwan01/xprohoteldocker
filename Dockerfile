@@ -1,7 +1,6 @@
 FROM php:8.2-apache
 
 RUN docker-php-ext-install mysqli
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-RUN a2enmod rewrite
-
-COPY apache.conf /etc/apache2/conf-enabled/custom.conf
+COPY ./src/ /var/www/html/
