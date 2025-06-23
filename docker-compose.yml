@@ -6,7 +6,7 @@ services:
     ports:
       - '3000:80'
     volumes:
-      - '/data/coolify/applications/pwg088c4g0c4soo48c8o0k88/src:/var/www/html'
+      - '/src:/var/www/html'
     environment:
       DB_CONNECTION: mysql
       DB_HOST: dkogwksc44kgc0gg4ksccws0
