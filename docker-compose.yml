@@ -1,27 +1,23 @@
-version: '3.9'
-
-# --- Metadata untuk Coolify ---
-# documentation: https://coolify.io
-# slogan: PHP Native via Raw Compose
+version: "3.9"
 
 services:
   web:
-    image: php:8.2-apache
-    container_name: php-xprohotel
-    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: php-native
     volumes:
       - ./src:/var/www/html
+    user: "33:33"
+    restart: unless-stopped
     labels:
       - coolify.managed=true
       - coolify.type=application
-
-      # 🔗 Traefik Proxy (HTTP Only)
       - traefik.enable=true
-      - "traefik.http.routers.xpro.rule=Host(`xprohotel.hostspot.online`) && PathPrefix(`/`)"
-      - traefik.http.routers.xpro.entryPoints=http
-      - traefik.http.middlewares.xpro-gzip.compress=true
-      - traefik.http.routers.xpro.middlewares=xpro-gzip
-
+      - traefik.http.routers.native.rule=Host(`xprohotel.hostspot.online`)
+      - traefik.http.routers.native.entryPoints=http
+      - traefik.http.middlewares.gzip.compress=true
+      - traefik.http.routers.native.middlewares=gzip
     networks:
       - coolify
 
