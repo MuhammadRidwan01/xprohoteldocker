@@ -27,4 +27,3 @@ services:
 networks:
   coolify:
     external: true
-y
